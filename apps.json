@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "pkg": "com.apkmaker.expense_splitter",
+    "name": "FairShare: Split Expenses",
+    "description": "Split shared costs in a group and see who owes whom, without an account.",
+    "by": "kingdompaulo",
+    "added": "2026-10-16",
+    "until": "2026-11-06",
+    "issue": 2,
+    "optIn": "https://play.google.com/apps/testing/com.apkmaker.expense_splitter",
+    "play": "https://play.google.com/store/apps/details?id=com.apkmaker.expense_splitter"
+  }
+]
