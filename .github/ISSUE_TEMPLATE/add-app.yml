@@ -1,0 +1,31 @@
+name: Find testers for my app
+description: List your app so other APK Maker users test it in its closed test.
+title: "[app] "
+labels: ["add-app"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        APK Maker fills this in for you (play tab › step 7 › ask the community). Before sending:
+        - Your app is on the **closed testing** track, and the community group below is one of its testers.
+        - You test other listed apps too: that is what makes it work.
+  - type: input
+    id: package
+    attributes:
+      label: Package name
+      placeholder: com.apkmaker.my_app
+    validations:
+      required: true
+  - type: input
+    id: name
+    attributes:
+      label: App name
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What it does
+      description: One or two sentences, and what you'd like testers to try.
+    validations:
+      required: true

@@ -1,0 +1,44 @@
+name: add app
+on:
+  issues:
+    types: [opened, edited, labeled]
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: apps-json
+  cancel-in-progress: false
+jobs:
+  add:
+    if: contains(github.event.issue.labels.*.name, 'add-app') && github.event.issue.state == 'open'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: add the app
+        id: add
+        env:
+          BODY: ${{ github.event.issue.body }}
+          AUTHOR: ${{ github.event.issue.user.login }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          set +e
+          scripts/add-app.sh > reply.md
+          echo "ok=$?" >> "$GITHUB_OUTPUT"
+      - name: commit
+        if: steps.add.outputs.ok == '0'
+        env:
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps.json
+          git diff --cached --quiet || git commit -m "list app from #$ISSUE"
+          git pull --rebase && git push
+      - name: reply
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE: ${{ github.event.issue.number }}
+          OK: ${{ steps.add.outputs.ok }}
+        run: |
+          gh issue comment "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file reply.md
+          if [ "$OK" = 0 ]; then gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY"; fi
