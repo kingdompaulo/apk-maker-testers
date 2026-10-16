@@ -1,13 +1,1 @@
-[
-  {
-    "pkg": "com.apkmaker.test_entry",
-    "name": "Test entry",
-    "description": "Checking the bot; removed right after.",
-    "by": "kingdompaulo",
-    "added": "2026-10-16",
-    "until": "2026-11-06",
-    "issue": 1,
-    "optIn": "https://play.google.com/apps/testing/com.apkmaker.test_entry",
-    "play": "https://play.google.com/store/apps/details?id=com.apkmaker.test_entry"
-  }
-]
+[]
